@@ -1,0 +1,55 @@
+<div class="products-container">
+  <header class="products-header">
+    <h1>Nuestros Productos</h1>
+    <p>Descubre nuestra amplia selección de productos electrónicos y accesorios</p>
+  </header>
+
+  <div class="filters">
+    <div class="filter-group">
+      <label for="category-select">Categoría:</label>
+      <select
+        id="category-select"
+        (change)="onCategoryChange($event)"
+        class="filter-select"
+      >
+        <option value="">Todas las categorías</option>
+        <option value="Electrónica">Electrónica</option>
+        <option value="Accesorios">Accesorios</option>
+        <option value="Fotografía">Fotografía</option>
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label for="sort-select">Ordenar por:</label>
+      <select
+        id="sort-select"
+        (change)="onSortChange($event)"
+        class="filter-select"
+      >
+        <option value="name">Nombre (A-Z)</option>
+        <option value="price-asc">Precio (menor a mayor)</option>
+        <option value="price-desc">Precio (mayor a menor)</option>
+        <option value="rating">Calificación</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="results-info">
+    <p>{{ filteredProducts().length }} productos encontrados</p>
+  </div>
+
+  @if (filteredProducts().length > 0) {
+    <div class="products-grid">
+      @for (product of filteredProducts(); track product.id) {
+        <app-product-card
+          [product]="product"
+          (addToCart)="onAddToCart($event)"
+        />
+      }
+    </div>
+  } @else {
+    <div class="no-results">
+      <p>No hay productos disponibles con los filtros seleccionados.</p>
+    </div>
+  }
+</div>
