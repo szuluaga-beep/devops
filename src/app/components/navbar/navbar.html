@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a [routerLink]="['/']" class="logo-link">
+        <span class="logo-icon">⚙️</span>
+        <span class="logo-text">EcCommerce</span>
+      </a>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a [routerLink]="['/productos']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          Productos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/devops']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          DevOps
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

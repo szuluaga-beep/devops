@@ -1,0 +1,265 @@
+<div class="devops-container">
+  <header class="devops-header">
+    <h1>DevOps Workflow Interactivo</h1>
+    <p>Haz click en cada etapa para explorar los detalles del flujo</p>
+  </header>
+
+  <div class="main-content">
+    <!-- Left Column: Diagram -->
+    <div class="diagram-column">
+      <div class="diagram-wrapper">
+        <svg
+          viewBox="0 0 1000 600"
+          xmlns="http://www.w3.org/2000/svg"
+          class="devops-diagram"
+        >
+          <!-- Circle background -->
+          <circle cx="500" cy="300" r="250" fill="none" stroke="#e5e7eb" stroke-width="2" />
+          
+          <!-- Animated flow circle -->
+          <circle cx="500" cy="300" r="260" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.2" class="flow-circle" />
+
+          <!-- Center circle -->
+          <circle cx="500" cy="300" r="80" fill="#3b82f6" opacity="0.1" />
+          <text x="500" y="295" text-anchor="middle" dy="0.3em" font-size="16" font-weight="bold" fill="#3b82f6">
+            DevOps
+          </text>
+          <text x="500" y="320" text-anchor="middle" dy="0.3em" font-size="12" fill="#6b7280">
+            Continuous Integration
+          </text>
+
+          <!-- Defs for arrows and animations -->
+          <defs>
+            <marker
+              id="arrowhead"
+              markerWidth="10"
+              markerHeight="10"
+              refX="9"
+              refY="3"
+              orient="auto"
+            >
+              <polygon points="0 0, 10 3, 0 6" fill="#9ca3af" />
+            </marker>
+            <style>
+              @keyframes pulse {
+                0%, 100% { r: 35; opacity: 1; }
+                50% { r: 40; opacity: 0.8; }
+              }
+              @keyframes flow {
+                0% { stroke-dashoffset: 0; }
+                100% { stroke-dashoffset: 1637; }
+              }
+              .stage-circle {
+                cursor: pointer;
+                transition: all 0.3s ease;
+              }
+              .stage-circle:hover {
+                filter: brightness(1.3);
+                r: 42;
+              }
+              .stage-circle.active {
+                filter: drop-shadow(0 0 10px currentColor);
+                animation: pulse 1.5s ease-in-out infinite;
+              }
+              .flow-circle {
+                stroke-dasharray: 1637;
+                animation: flow 20s linear infinite;
+              }
+            </style>
+          </defs>
+
+          <!-- Arrows connecting the stages -->
+          <path d="M 525 110 Q 650 90 745 125" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+          <path d="M 795 170 Q 850 250 860 345" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+          <path d="M 820 410 Q 760 470 735 485" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+          <path d="M 670 545 Q 560 560 485 560" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+          <path d="M 420 540 Q 300 520 235 485" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+          <path d="M 175 450 Q 140 360 130 275" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+          <path d="M 150 210 Q 180 140 205 115" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+          <path d="M 250 85 Q 375 85 465 90" stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrowhead)" opacity="0.5" />
+
+          <!-- Plan -->
+          <g class="devops-stage" (click)="selectStage('plan')">
+            <circle 
+              class="stage-circle" 
+              [attr.class]="'stage-circle ' + (selectedStage() === 'plan' ? 'active' : '')"
+              cx="500" cy="80" r="35" fill="#3b82f6" 
+            />
+            <text x="500" y="85" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Plan
+            </text>
+            <text x="500" y="150" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Planificación
+            </text>
+          </g>
+
+          <!-- Code -->
+          <g class="devops-stage" (click)="selectStage('code')">
+            <circle 
+              class="stage-circle"
+              [attr.class]="'stage-circle ' + (selectedStage() === 'code' ? 'active' : '')"
+              cx="780" cy="140" r="35" fill="#10b981" 
+            />
+            <text x="780" y="145" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Code
+            </text>
+            <text x="780" y="210" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Desarrollo
+            </text>
+          </g>
+
+          <!-- Build -->
+          <g class="devops-stage" (click)="selectStage('build')">
+            <circle 
+              class="stage-circle"
+              [attr.class]="'stage-circle ' + (selectedStage() === 'build' ? 'active' : '')"
+              cx="850" cy="380" r="35" fill="#f59e0b" 
+            />
+            <text x="850" y="385" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Build
+            </text>
+            <text x="850" y="450" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Construcción
+            </text>
+          </g>
+
+          <!-- Test -->
+          <g class="devops-stage" (click)="selectStage('test')">
+            <circle 
+              class="stage-circle"
+              [attr.class]="'stage-circle ' + (selectedStage() === 'test' ? 'active' : '')"
+              cx="700" cy="520" r="35" fill="#8b5cf6" 
+            />
+            <text x="700" y="525" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Test
+            </text>
+            <text x="700" y="590" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Pruebas
+            </text>
+          </g>
+
+          <!-- Release -->
+          <g class="devops-stage" (click)="selectStage('release')">
+            <circle 
+              class="stage-circle"
+              [attr.class]="'stage-circle ' + (selectedStage() === 'release' ? 'active' : '')"
+              cx="450" cy="560" r="35" fill="#ec4899" 
+            />
+            <text x="450" y="565" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Release
+            </text>
+            <text x="450" y="630" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Lanzamiento
+            </text>
+          </g>
+
+          <!-- Deploy -->
+          <g class="devops-stage" (click)="selectStage('deploy')">
+            <circle 
+              class="stage-circle"
+              [attr.class]="'stage-circle ' + (selectedStage() === 'deploy' ? 'active' : '')"
+              cx="200" cy="480" r="35" fill="#ef4444" 
+            />
+            <text x="200" y="485" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Deploy
+            </text>
+            <text x="200" y="550" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Despliegue
+            </text>
+          </g>
+
+          <!-- Operate -->
+          <g class="devops-stage" (click)="selectStage('operate')">
+            <circle 
+              class="stage-circle"
+              [attr.class]="'stage-circle ' + (selectedStage() === 'operate' ? 'active' : '')"
+              cx="130" cy="240" r="35" fill="#06b6d4" 
+            />
+            <text x="130" y="245" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Operate
+            </text>
+            <text x="130" y="310" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Operación
+            </text>
+          </g>
+
+          <!-- Monitor -->
+          <g class="devops-stage" (click)="selectStage('monitor')">
+            <circle 
+              class="stage-circle"
+              [attr.class]="'stage-circle ' + (selectedStage() === 'monitor' ? 'active' : '')"
+              cx="220" cy="80" r="35" fill="#6366f1" 
+            />
+            <text x="220" y="85" text-anchor="middle" dy="0.3em" font-size="14" font-weight="bold" fill="white" pointer-events="none">
+              Monitor
+            </text>
+            <text x="220" y="150" text-anchor="middle" font-size="12" fill="#374151" pointer-events="none">
+              Monitoreo
+            </text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right Column: Details -->
+    <div class="details-column">
+      @if (getSelectedStage(); as stage) {
+        <div class="stage-details" [@fadeInOut]>
+          <div class="details-card">
+            <div class="details-header" [style.background]="stage.color">
+              <h2>{{ stage.emoji }} {{ stage.title }}</h2>
+            </div>
+            <div class="details-content">
+              <p class="description">{{ stage.description }}</p>
+              <h3>Actividades clave:</h3>
+              <ul class="activities-list">
+                @for (detail of stage.details; track detail) {
+                  <li>
+                    <span class="bullet">▸</span>
+                    {{ detail }}
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="tools-section">
+    <h2>🛠️ Herramientas Comunes por Etapa</h2>
+    <div class="tools-grid">
+      <div class="tool-item">
+        <span class="tool-icon">📊</span>
+        <p>Git / GitHub</p>
+        <small>Control de versiones</small>
+      </div>
+      <div class="tool-item">
+        <span class="tool-icon">🔄</span>
+        <p>Jenkins / GitLab CI</p>
+        <small>CI/CD Automation</small>
+      </div>
+      <div class="tool-item">
+        <span class="tool-icon">📦</span>
+        <p>Docker / Kubernetes</p>
+        <small>Containerización</small>
+      </div>
+      <div class="tool-item">
+        <span class="tool-icon">☁️</span>
+        <p>AWS / Azure / GCP</p>
+        <small>Cloud Computing</small>
+      </div>
+      <div class="tool-item">
+        <span class="tool-icon">📈</span>
+        <p>Prometheus / Grafana</p>
+        <small>Monitoreo</small>
+      </div>
+      <div class="tool-item">
+        <span class="tool-icon">🛡️</span>
+        <p>Ansible / Terraform</p>
+        <small>Infrastructure as Code</small>
+      </div>
+    </div>
+  </div>
+</div>
